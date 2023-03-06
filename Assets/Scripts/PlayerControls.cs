@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,23 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField] float offsetThrow = 30f;
 
+    [SerializeField] float smoothInputSpeed = .1f;
+
     [SerializeField] float xRange = 8f;
     [SerializeField] float yRange = 5.5f;
+
+    [SerializeField] float positionPitchFactor = -1.5f;
+    [SerializeField] float positionYawFactor = -2f;
+
+    [SerializeField] float controllPitchFactor = -1.2f;
+    [SerializeField] float controllRollFactor = -10f;
+
+
+    float xThrow, yThrow;
+
+    Vector2 currentInputVector;
+    Vector2 smoothInputVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,15 +47,42 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xThrow = movement.ReadValue<Vector2>().x;
-        float yThrow = movement.ReadValue<Vector2>().y;
+        smoothController();
+        ProcessTranslation();
+        ProcessRotation();
+
+    }
+
+    private void smoothController()
+    {
+        Vector2 throw_ = movement.ReadValue<Vector2>();
+        currentInputVector = Vector2.SmoothDamp(currentInputVector, throw_, ref smoothInputVelocity, smoothInputSpeed);
+
+        xThrow = currentInputVector.x;
+        yThrow = currentInputVector.y;
+    }
+
+    private void ProcessRotation()
+    {
+        float pitchDuePosition = transform.localPosition.y * positionPitchFactor;
+        float pitchDueToControl = yThrow * controllPitchFactor;
 
 
-        float xPos= transform.localPosition.x + offsetThrow * xThrow * Time.deltaTime;
+        float pitch = (pitchDuePosition + pitchDueToControl) *-1;
+        float yaw = transform.localPosition.x * positionYawFactor;
+        float roll = xThrow * controllRollFactor;
+
+        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    private void ProcessTranslation()
+    {
+
+        float xPos = transform.localPosition.x + offsetThrow * xThrow * Time.deltaTime;
         float yPos = transform.localPosition.y + offsetThrow * yThrow * Time.deltaTime;
 
-        float clampedXPos = Mathf.Clamp(xPos,-xRange,xRange);
-        float clampedYPos = Mathf.Clamp(yPos, -yRange, yRange); 
+        float clampedXPos = Mathf.Clamp(xPos, -xRange, xRange);
+        float clampedYPos = Mathf.Clamp(yPos, -yRange, yRange);
 
         transform.localPosition = new Vector3
             (clampedXPos,
@@ -47,5 +90,6 @@ public class PlayerControls : MonoBehaviour
             transform.localPosition.z);
 
 
+        
     }
 }

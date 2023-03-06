@@ -464,7 +464,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -692,9 +692,14 @@ MonoBehaviour:
       m_Action: Fire
       m_Flags: 0
     m_Flags: 0
-  offsetThrow: 30
-  xRange: 8
-  yRange: 5.5
+  offsetThrow: 35
+  smoothInputSpeed: 0.075
+  xRange: 19
+  yRange: 9
+  positionPitchFactor: -1.5
+  positionYawFactor: -1.2
+  controllPitchFactor: -1.2
+  controllRollFactor: -3.68
 --- !u!1001 &6448192674209470936
 PrefabInstance:
   m_ObjectHideFlags: 0
