@@ -24,6 +24,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float controllPitchFactor = -1.2f;
     [SerializeField] float controllRollFactor = -10f;
 
+    [SerializeField] GameObject[] lasers;
+
 
     float xThrow, yThrow;
 
@@ -38,11 +40,13 @@ public class PlayerControls : MonoBehaviour
     void OnEnable()
     {
         movement.Enable();
+        fire.Enable();
     }
 
     private void OnDisable()
     {
         movement.Disable();
+        fire.Disable();
     }
     // Update is called once per frame
     void Update()
@@ -50,7 +54,37 @@ public class PlayerControls : MonoBehaviour
         smoothController();
         ProcessTranslation();
         ProcessRotation();
+        ProcessFiring();
 
+    }
+
+    private void ProcessFiring()
+    {
+        if (fire.ReadValue<float>() > 0.5f)
+        {
+            ActivateLasers();
+        }
+        else
+        {
+            DeactivateLasers();
+        }
+        
+    }
+
+    void DeactivateLasers()
+    {
+        foreach (GameObject laser in lasers)
+        {
+            laser.SetActive(false);
+        }
+    }
+
+    void ActivateLasers()
+    {
+        foreach (GameObject laser in lasers)
+        {
+            laser.SetActive(true);
+        }
     }
 
     private void smoothController()
