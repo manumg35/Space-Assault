@@ -24,7 +24,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float controllPitchFactor = -1.2f;
     [SerializeField] float controllRollFactor = -10f;
 
-    [SerializeField] GameObject[] lasers;
+    [SerializeField] ParticleSystem[] lasers;
 
 
     float xThrow, yThrow;
@@ -62,28 +62,23 @@ public class PlayerControls : MonoBehaviour
     {
         if (fire.ReadValue<float>() > 0.5f)
         {
-            ActivateLasers();
+            SetLasers(true);
         }
         else
         {
-            DeactivateLasers();
+            SetLasers(false);
         }
         
     }
 
-    void DeactivateLasers()
-    {
-        foreach (GameObject laser in lasers)
-        {
-            laser.SetActive(false);
-        }
-    }
 
-    void ActivateLasers()
+
+    void SetLasers(bool active)
     {
-        foreach (GameObject laser in lasers)
+        foreach (ParticleSystem laser in lasers)
         {
-            laser.SetActive(true);
+            var emission = laser.emission;
+            emission.enabled = active;
         }
     }
 

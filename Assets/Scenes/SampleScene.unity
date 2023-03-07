@@ -201,9 +201,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &266019620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2531857721628389076, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
+--- !u!198 &266019621 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5146188324422781229, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
   m_PrefabInstance: {fileID: 3127020142216826037}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &652130287
@@ -476,9 +476,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1905985267 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5513983527201265843, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
+--- !u!198 &1905985270 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2940150033467129674, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
   m_PrefabInstance: {fileID: 3127020142216826037}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3127020142216826037
@@ -583,11 +583,19 @@ PrefabInstance:
     - target: {fileID: 3128498596516732327, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
       propertyPath: lasers.Array.data[0]
       value: 
-      objectReference: {fileID: 1905985267}
+      objectReference: {fileID: 1905985270}
     - target: {fileID: 3128498596516732327, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
       propertyPath: lasers.Array.data[1]
       value: 
-      objectReference: {fileID: 266019620}
+      objectReference: {fileID: 266019621}
+    - target: {fileID: 3128498596516732327, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
+      propertyPath: lasers.Array.data[2]
+      value: 
+      objectReference: {fileID: 1905985270}
+    - target: {fileID: 3128498596516732327, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
+      propertyPath: lasers.Array.data[3]
+      value: 
+      objectReference: {fileID: 266019621}
     - target: {fileID: 3128498596516732327, guid: 328551e8a9968bd4eb898ae85ac01198, type: 3}
       propertyPath: fire.m_ExpectedControlType
       value: Button
