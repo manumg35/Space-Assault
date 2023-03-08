@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float loadDelay=1f;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -14,9 +16,19 @@ public class CollisionHandler : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        StartCrashSequence();
+    }
 
-        Debug.Log(this.name + " Meh triggered with "+ other.gameObject.name);
+    private void StartCrashSequence()
+    {
+        GetComponent<PlayerControls>().enabled = false;
+        Invoke("ReloadScene", loadDelay);
+    }
+
+    void ReloadScene()
+    {
         SceneManager.LoadScene(0);
     }
-    
+
+
 }
