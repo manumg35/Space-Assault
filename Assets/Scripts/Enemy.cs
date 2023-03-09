@@ -14,15 +14,21 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] int healthPoints = 8;
 
-    
-
-
+    Rigidbody rb;
     ScoreBoard scoreBoard;
 
     void Start()
     {
+        AddRigidbody();
         scoreBoard = FindObjectOfType<ScoreBoard>();
     }
+
+    private void AddRigidbody()
+    {
+        rb = this.gameObject.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+    }
+
     void OnParticleCollision(GameObject other)
     {
         ProcessHit(other);
